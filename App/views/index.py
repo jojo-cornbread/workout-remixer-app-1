@@ -2,13 +2,17 @@ from flask import Blueprint, redirect, render_template, request, send_from_direc
 from App.models import db
 from App.controllers import create_user
 
+from App.models import *
+
 import requests
 import json
 
 index_views = Blueprint('index_views', __name__, template_folder='../templates')
 
 @index_views.route('/', methods=['GET'])
-def index_page():
+@index_views.route('/<int:category>', methods=['GET'])
+#need to set up login things
+def index_page(category = 1):
 
     url = 'https://wger.de/api/v2/exercisecategory/?format=json'
 
@@ -19,9 +23,15 @@ def index_page():
         categories = response.json()
         categories = categories['results']
 
+        exercises_list = Exercise.query.filter_by(category=category)
+
         # return jsonify(categories)
 
-    return render_template('index.html', categories = categories)
+    return render_template('index.html', categories = categories, exercises_list = exercises_list)
+
+    # return something if the response bad?
+    # else:
+    #     return
 
     # return render_template("home.html", pokemon = pokemon, pokemon_sel = pokemon_sel)
 

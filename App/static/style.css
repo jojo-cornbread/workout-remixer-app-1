@@ -68,39 +68,45 @@ body{
     position: fixed;
     top: 10;
     right: 0;
-    width: 400px;
+    width: 390px;
     height: 100%;
     padding: 20px 0;
     transition: all 0.5s ease;
 }
 
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0px;
+}
+
 .card {
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .card-image {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-  }
-  
-  .card-content {
-    padding: 200px;
-  }
-  
-  .card-title {
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0 0 10px;
-  }
-  
-  .card-description {
-    font-size: 16px;
-    margin: 0 0 15px;
-  }
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 20px; 
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+
+.card-description {
+  font-size: 16px;
+  margin: 0 0 15px;
+}
 
   .sidebar-card {
     width: 300px;

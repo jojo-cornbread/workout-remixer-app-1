@@ -60,16 +60,16 @@ def initialize():
         # then print the exercise name
         for i in range (len(data['results'])):
             
-            if(data['results'][i]['id']) == 3:
+            if(data['results'][i]['id']) == 91:
                     print(data['results'][i]['name'])
+
 
             if(data['results'][i]['language'] == 2):
                 #print the name of the exericse
                 # print(data['results'][i]['name'])
-                create_exercise(data['results'][i]['name'], data['results'][i]['description'], data['results'][i]['category'])
+                create_exercise(data['results'][i]['name'],data['results'][i]['id'], data['results'][i]['description'], data['results'][i]['category'])
 
-                # if(data['results'][i]['id']) == 3:
-                #     print(data['results'][i]['name'])
+                
 
 
         # NOW YOU CAN ADD IN THE EXERCISES TO THE DATABASE BY FILTERING THE INFORMATION NEEDED

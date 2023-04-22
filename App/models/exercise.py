@@ -5,7 +5,7 @@ class Exercise(db.Model):
     name = db.Column(db.String, nullable=False)
 
     # may not need exercise_id
-    # exercise_id = db.Column(db.Integer, nullable=False)
+    exercise_id = db.Column(db.Integer, nullable=False)
 
     description = db.Column(db.String, nullable=True)
     category = db.Column(db.Integer, nullable=False)
@@ -17,6 +17,7 @@ class Exercise(db.Model):
         return{
             "id":self.id,
             "name":self.name,
+            "exercise_id":self.exercise_id,
             "description":self.description,
             "category":self.category
         }

@@ -1,8 +1,8 @@
 from App.models import Exercise
 from App.database import db
 
-def create_exercise(name, description, category):
-    newExercise = Exercise(name=name, description=description, category=category)
+def create_exercise(name,exercise_id, description, category):
+    newExercise = Exercise(name=name, exercise_id=exercise_id, description=description, category=category)
     db.session.add(newExercise)
     db.session.commit()
     return newExercise
@@ -12,6 +12,9 @@ def get_exercise_by_name(name):
 
 def get_exercise_by_id(id):
     return Exercise.query.get(id)
+
+def get_exercise_by_exerciseid(exercise_id):
+    return Exercise.query.filter_by(exercise_id=exercise_id).first()
 
 def get_all_exercises():
     return Exercise.query.all()
