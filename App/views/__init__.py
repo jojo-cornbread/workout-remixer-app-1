@@ -6,5 +6,8 @@ from .auth import auth_views
 
 from .exercise import exercise_views
 
+# from .exerciseSet import exerciseSet_views
+
+# add in the exerciseSet_views here after
 views = [user_views, index_views, auth_views, exercise_views] 
 # blueprints must be added to this list

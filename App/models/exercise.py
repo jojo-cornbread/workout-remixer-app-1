@@ -15,7 +15,7 @@ class Exercise(db.Model):
     # get_json function
     def get_json(self):
         return{
-            "exercise_id":self.id,
+            "id":self.id,
             "name":self.name,
             "description":self.description,
             "category":self.category

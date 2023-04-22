@@ -17,15 +17,30 @@
                     <h4>CATEGORIES</h4>
                 </div>
                 <li>
-                    <a href="#" class="active">
-                        <span class="icon"></span>
-                        <span class="item">ABS</span>
-                    </a>
+                    {% for category in categories %}
                     <a href="#">
+                        <!-- abs has an id of 10 -->
+                        <!-- the href link would have to go to the route that renders the exercises -->
+                        <span class="icon"></span>
+                        <span class="item">{{category['name']}}</span>
+                    </a>
+                    {% endfor %}
+                    <!-- <a href="#">
                         <span class="icon"></span>
                         <span class="item">LEGS</span>
-                    </a>
+                    </a> -->
                 </li>
+                <script>
+                    var activeLink = document.get_exercise_by_id("id");
+                    activeLink.classList.add("active");  
+                 </script>
+
+                <!-- <div class="list-item">   
+                    <a href="/app/1" id="poke-1" class="collection-item active" >Bulbasaur</a>
+                    {% for poke in pokemon %} 
+                        <a href="/app/{{poke.id}}" id="poke-{{poke.id}}" class="collection-item active" >{{poke.name}}</a>
+                    {% endfor %}
+                </div> -->
                 
            <!--profile image & text-->
             <!--menu item-->
