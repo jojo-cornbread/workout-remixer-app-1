@@ -4,6 +4,9 @@ from flask_login import current_user, login_required
 
 from.index import index_views
 
+import requests
+import json
+
 from App.controllers import (
     create_user,
     jwt_authenticate, 
@@ -17,7 +20,7 @@ user_views = Blueprint('user_views', __name__, template_folder='../templates')
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
     users = get_all_users()
-    return render_template('signup.html', users=users)
+    return render_template('users.html', users=users)
 
 @user_views.route('/api/users', methods=['GET'])
 def get_users_action():

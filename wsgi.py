@@ -6,13 +6,25 @@ from App.database import db, get_migrate
 from App.main import create_app
 
 # import the other controllers
-from App.controllers import ( create_user, get_all_users_json, get_all_users)
-from App.controllers import ( create_exercise, get_all_exercises_json, get_all_exercises)
+# user controller
+# from App.controllers import ( create_user, get_all_users_json, get_all_users)
+from App.controllers import *
+#exercise controller
+# from App.controllers import ( create_exercise, get_all_exercises_json, get_all_exercises)
+#exerciseSet controller
+# from App.controllers import (create_exerciseSet, get_all_exerciseSets_json, get_all_exerciseSets)
 
 import requests
 import json
 # This commands file allow you to create convenient CLI commands for testing controllers
 
+#hi sabrina
+#hi Josiah
+#cryBuddies lmaooo
+# depression
+
+# hello again
+#hello from the other side
 app = create_app()
 migrate = get_migrate(app)
 
@@ -24,7 +36,7 @@ def initialize():
     create_user('bob','bob@mail.com', 'bobpass')
 
     # add all the exercises here
-    url = 'https://wger.de/api/v2/exercise/?format=json&limit=200'
+    url = 'https://wger.de/api/v2/exercise/?format=json&limit=800'
 
     # https://wger.de/api/v2/exercise/?format=json&limit=200 sets the amount of exercises
     # to a limit of 200, the limit can be altered or removed
@@ -47,13 +59,36 @@ def initialize():
         # this loops through th size of the data['results'] and if the language == 2 (english)
         # then print the exercise name
         for i in range (len(data['results'])):
+            
+            if(data['results'][i]['id']) == 3:
+                    print(data['results'][i]['name'])
+
             if(data['results'][i]['language'] == 2):
                 #print the name of the exericse
                 # print(data['results'][i]['name'])
                 create_exercise(data['results'][i]['name'], data['results'][i]['description'], data['results'][i]['category'])
 
+                # if(data['results'][i]['id']) == 3:
+                #     print(data['results'][i]['name'])
+
 
         # NOW YOU CAN ADD IN THE EXERCISES TO THE DATABASE BY FILTERING THE INFORMATION NEEDED
+    
+    # add in methods to the user controller to add exercises to a set,
+    # look at the captre pokemon etc in assignment2 models
+
+
+    user = get_user_by_username('bob')
+    user = user.get_json()
+    # print(user['id'])
+
+    exerciseSetName = "oogabooga"
+
+    testExerciseID = get_exercise_by_id(1)
+    testExerciseID = testExerciseID.get_json()
+    # print(testExerciseID['id'])
+
+    add_exerciseSet(exerciseSetName ,user['id'], testExerciseID['id'])
 
     print('database intialized')
 
@@ -103,6 +138,23 @@ def list_exercise_command(format):
         print(get_all_exercises_json())
 
 app.cli.add_command(exercise_cli)
+
+'''
+ExerciseSet Commands
+'''
+exerciseSet_cli = AppGroup('exerciseSet', help='ExerciseSet object commands')
+
+@exerciseSet_cli.command("list", help="Lists all exerciseSets in the database")
+@click.argument("format", default="string")
+def list_exerciseSet_command(format):
+    if format == 'string':
+        print(get_all_exerciseSets())
+    else:
+        print(get_all_exerciseSets_json())
+
+app.cli.add_command(exerciseSet_cli)
+
+
 
 '''
 Test Commands
