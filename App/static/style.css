@@ -6,6 +6,13 @@
   background-size:cover;
 }
 
+.Login_page{
+  background-image: url("https://img.freepik.com/premium-photo/3d-rendering-black-dumbbells-floor-dark-concept-fitness-room-with-training-equipments-back_67155-14961.jpg");
+  background-repeat:no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size:cover;
+}
 
 * {
 	box-sizing: border-box;
@@ -65,7 +72,7 @@ body {
   position: fixed;
   top: 10;
   right: 0;
-  width: 200px;
+  width: 225px;
   height: 100%;
   padding: 20px 0;
   transition: all 0.5s ease;
@@ -114,6 +121,25 @@ body {
 .wrapper .left-section .profile h3{
   color: #ffffff;
   margin: 10px 0 5px;
+}
+
+.card-container2 {
+  display: flex; /* Use flexbox layout */
+  flex-wrap: wrap; /* Wrap items to next line if needed */
+  justify-content: center; /* Center items horizontally */
+  gap: 20px; /* Add gap between items */
+  margin: 0;
+  padding: 0;
+  flex-direction: row; /* Set flex direction to horizontal */
+}
+.card2 {
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  
 }
 
 .card-container {
@@ -180,6 +206,10 @@ body {
   font-size: 16px;
   font-weight: bold;
   margin: 0 0 5px;
+  display: block;
+  padding: 13px 30px;
+  color: rgb(241, 237, 237);
+  position: relative;
 }
 
 .sidebar-card-description {
@@ -197,3 +227,31 @@ body {
   font-size: 12px;
 }
 
+ .btn1{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin: 10px; /* Add margin for spacing */
+  padding: 10px; /* Add padding for button size */
+  background-color: #000; /* Set background color */
+  color: #fff; /* Set text color */
+  border: none; /* Remove button border */
+  border-radius: 5px; /* Add border radius for rounded corners */
+  cursor: pointer; /* Add pointer cursor on hover */
+}
+
+.card-description-toggle {
+  display: none;
+}
+
+.card-description-label {
+  cursor: pointer;
+}
+
+.card-description {
+  display: none;
+}
+
+.card-description-toggle:checked + .card-description-label + .card-description {
+  display: block;
+}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}MySpace{% endblock %}
+{% block page %}EnduranceEmpire{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+<body  class = "userInfo_page">
+    <div class="content fill-space">
+      <div class="subcontent center-vertical">
+        <h4 class="center">MySpace</h4>
+        <div class="card-container2">
+            {% for exercise in exerciseList %}
+            <div class="card2">
+                <img src="https://wger.de/media/exercise-images/{{exercise['exercise_id']}}/{{exercise['exercise'].replace(' ', '-')}}-1.png" alt="Image" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">{{exercise['exercise']}}</h3>
+                    <input type="checkbox" id="dropdown-toggle" class="card-description-toggle">
+                    <label for="dropdown-toggle" class="card-description-label">Click to Show Description</label>
+                    <p class="card-description">Jump</p>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- <div class="card2">
+                <img src='https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg' alt="Image" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">JumpingJacks</h3>
+                    <input type="checkbox" id="dropdown-toggle" class="card-description-toggle">
+                    <label for="dropdown-toggle" class="card-description-label">Click to Show Description</label>
+                    <p class="card-description">Jump</p>
+                </div> -->
+        </div>
+        <a href="/app" id="backButton" class="btn1">Back</a>
+</body>
+{% endblock %}

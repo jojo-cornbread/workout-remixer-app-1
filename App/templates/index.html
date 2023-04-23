@@ -43,16 +43,14 @@
                     <img src="https://wger.de/media/exercise-images/{{exercise.exercise_id}}/{{exercise.name.replace(' ', '-')}}-1.png" onerror=this.src='https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg' alt="Image" class="card-image">
                     <div class="card-content">
                         <h3 class="card-title">{{exercise.name}}</h3>
-                        <form method = "POST" action = "/exercise/{{exercise.id}}">
+                        <form method="POST" action="/add-exerciseSet/{{exercise.id}}">
                             <input type="text" name="exerciseSet_name" class="form-input" placeholder="Enter exercise set name" style="color: #000;" />
                             <button type="submit" class="form-button">Submit</button>
                         </form>
-                        <div class="card-description-dropdown">
-                            <p class="card-description">{{exercise.description}}</p>
-                        </div>
-                            <!-- <p class="card-description">{{exercise.description}}</p> -->
+                        <input type="checkbox" id="dropdown-toggle-{{exercise.id}}" class="card-description-toggle">
+                        <label for="dropdown-toggle-{{exercise.id}}" class="card-description-label">Click to Show Description</label>
+                        <p class="card-description">{{exercise.description}}</p>
                     </div>
-                    <!-- </div> -->
                 </div>
                 {% endfor %}
             </div>
@@ -64,8 +62,8 @@
                     img.src = 'https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg';
                 }
             </script>
+		</div>
 
-		<!-- </div> -->
 		<div class="right-section" style="overflow-y: auto;">
 
             <div class="profile">
@@ -81,13 +79,19 @@
                 <div class="sidebar-card-content">
                     
                     <img src="https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg" alt="Image" class="sidebar-card-image">
-                    <a href="/exerciseSet/{{exerciseSet.id}}" id="exerciseSet-{{exerciseSet.id}}"> 
+                    <!-- may need to change href below -->
+                    <a href="/exerciseSet-info/{{exerciseSet.name}}" id="exerciseSet-{{exerciseSet.id}}"> 
                         <h3 class="sidebar-card-title">{{exerciseSet.name}}</h3>
                     </a>
+
+                    <div class="card-action">
+                        <a href="/delete-exerciseSet/{{exerciseSet.id}}" id = "Delete--{{exerciseSet.name}}">DELETE</a>
+                    </div>
                     <!-- <h3 class="sidebar-card-title">{{exerciseSet.name}}</h3> -->
                     <!-- <p class="sidebar-card-description">Card Description goes here. It can be multiple lines of text.</p> -->
-                    </div>
                 </div>
+            </div>
+
             {% endfor %}
             
 		</div>

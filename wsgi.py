@@ -152,6 +152,20 @@ def list_exerciseSet_command(format):
     else:
         print(get_all_exerciseSets_json())
 
+@exerciseSet_cli.command("sort-name", help="returns a list of all exerciseSets by name")
+# @click.argument("format", default="string")
+@click.argument("name", default="")
+def sort_name_exerciseSet_command(name):
+    if name == '':
+        # exerciseSets = ExerciseSet.query.filter_by(name=name).all()
+        print("No name entered")
+    else:
+        exerciseSets = get_all_exerciseSets_json()
+
+        for exerciseSet in exerciseSets:
+            if(exerciseSet['name'] == name):
+                print(exerciseSet)
+
 app.cli.add_command(exerciseSet_cli)
 
 

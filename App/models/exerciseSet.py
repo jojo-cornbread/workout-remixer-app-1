@@ -4,8 +4,9 @@ class ExerciseSet(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'))
-    name = db.Column(db.String, nullable = False, unique=True)
+    name = db.Column(db.String, nullable = False)
 
+    # , unique=True
     # ???
     exercise = db.relationship('Exercise')
 
@@ -22,7 +23,8 @@ class ExerciseSet(db.Model):
             'id': self.id,
             'name': self.name,
             'exercise': self.exercise.name,
-            'user_id': self.user_id
+            'user_id': self.user_id,
+            'exercise_id':self.exercise_id
         }
 
 

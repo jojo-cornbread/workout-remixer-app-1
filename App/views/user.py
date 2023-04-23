@@ -44,7 +44,37 @@ def signup_page():
   return render_template('users.html')
 
 
+@user_views.route('/signup', methods=['POST'])
+def signup_action():
+    data = request.form
+    newUser = create_user(data['username'], data['email'], data['password'])
 
+    try:
+        db.session.add(newUser)
+        db.session.commit()
+        login_user(newUser)
+        flash('Account Created!')
+        return redirect(url_for('index_views.index_page'))
+    except Exception:
+        db.session.rollback()
+        flash("Username or email already exists")
+    return redirect(url_for('signup_page'))
+
+# @app.route('/signup', methods = ['POST'])
+# def signup_action():
+#   data = request.form
+#   newUser = User(username = data['username'], email = data['email'], password = data['password'])
+
+#   try:
+#     db.session.add(newUser)
+#     db.session.commit()
+#     login_user(newUser)
+#     flash('Account Created!')
+#     return redirect(url_for('home_page'))
+#   except Exception:
+#     db.session.rollback()
+#     flash("username or email already exists")
+#   return redirect(url_for('signup_page'))
 
 
 
@@ -76,3 +106,6 @@ def static_user_page():
   return send_from_directory('static', 'static-user.html')
 
   
+@user_views.route('/user_info', methods=['GET'])
+def userInfo_page():
+  return render_template('user_info.html')

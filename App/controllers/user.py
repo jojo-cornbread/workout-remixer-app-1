@@ -40,6 +40,35 @@ def add_exerciseSet(name, user_id, exercise_id):
             return None
         return None
 
+def delete_exerciseSet(exerciseSet_id):
+
+    exerciseSets = ExerciseSet.query.filter_by(id=exerciseSet_id).all()
+
+    if exerciseSets is not None:
+        for exerciseSet in exerciseSets:
+            db.session.delete(exerciseSet)
+        
+            db.session.commit()
+        return True
+    return None
+
+# def release_pokemon(self, poke_id):
+#     poke = UserPokemon.query.get(poke_id)
+#     if poke.user == self:
+#       db.session.delete(poke)
+#       db.session.commit()
+#       return True
+#     return None
+
+#   def rename_pokemon(self, poke_id, name):
+#     poke = UserPokemon.query.get(poke_id)
+#     if poke.user == self:
+#       poke.name = name
+#       db.session.add(poke)
+#       db.session.commit()
+#       return True
+#     return None
+
 # def add_exerciseSet(name, user_id, exercise_id):
 #     exercise = Exercise.query.get(exercise_id)
 #     # exercise = get_exercise_by_id(exercise_id)
