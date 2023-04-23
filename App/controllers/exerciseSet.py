@@ -10,6 +10,10 @@ def create_exerciseSet(name, user_id, exercise_id):
 
 # different methods we may need later on
 # get_exerciseSet_user()
+# def addExercise(name, user_id, exercise_id):
+#     exerciseSet = get_exerciseSet_by_name(name)
+
+#     exerciseSet
 
 
 def get_exerciseSet_by_name(name):

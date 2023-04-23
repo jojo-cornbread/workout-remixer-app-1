@@ -1,8 +1,10 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 from flask_jwt_extended import jwt_required, current_user as jwt_current_user
-from flask_login import current_user, login_required
+from flask_login import current_user, login_required, login_user
 
 from.index import index_views
+
+from App.models import *
 
 import requests
 import json
@@ -16,6 +18,35 @@ from App.controllers import (
 )
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
+
+
+
+@user_views.route('/', methods=['GET'])
+@user_views.route('/login', methods=['GET'])
+def login_page():
+  return render_template('login.html')
+
+@user_views.route('/login', methods=['POST'])
+def login_action():
+
+  data = request.form
+  user = User.query.filter_by(username=data['username']).first()
+  if user and user.check_password(data['password']):  # check credentials
+    flash('Logged in successfully.')  # send message to next page
+    login_user(user)  # login the user
+    return redirect('/app')  # redirect to main page if login successful
+  else:
+    flash('Invalid username or password')  # send message to next page
+  return redirect('/')
+
+@user_views.route('/signup', methods=['GET'])
+def signup_page():
+  return render_template('users.html')
+
+
+
+
+
 
 @user_views.route('/users', methods=['GET'])
 def get_user_page():

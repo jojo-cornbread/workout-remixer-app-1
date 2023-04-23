@@ -22,7 +22,12 @@ def add_exerciseSet(name, user_id, exercise_id):
         try:
             # print('test1')
             # exerciseSet = create_exerciseSet(name=name, user_id=user_id, exercise_id=exercise_id)
+            # newExerciseSet = ExerciseSet.query.filter_by(name=name).first()
 
+            # if newExerciseSet is not None:
+            #     # add to the set
+            #     test = 1
+            # else:
             newExerciseSet = ExerciseSet(user_id=user_id, exercise_id=exercise_id, name=name)
             db.session.add(newExerciseSet)
             db.session.commit()
