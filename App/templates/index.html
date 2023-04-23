@@ -1,24 +1,23 @@
 {% extends "layout.html" %}
-{% block title %}Flask MVC App{% endblock %}
-{% block page %}EnduranceEmpire{% endblock %}
 
-{{ super() }}
+<header>
+    {% block title %}Flask MVC App{% endblock %}
+    {% block page %}EnduranceEmpire{% endblock %}
+    {{ super() }}
 
-{% block content %}
+    {% block content %}
+</header>
 
 <body>
-    
-    <div class="wrapper">
-        <!--Top menu -->
-                                                               
-        <div class="sidebar">   `
-            <ul>
+	<div class="wrapper">
+		<div class="left-section">
+			<ul>
                 <div class="profile">
                     <h4>CATEGORIES</h4>
                 </div>
                 <li>
                     {% for category in categories %}
-                    <a href="/{{category['id']}}">
+                    <a href="/app/{{category['id']}}">
                         <!-- abs has an id of 10 -->
                         <!-- the href link would have to go to the route that renders the exercises -->
                         <span class="icon"></span>
@@ -33,49 +32,80 @@
                 <script>
                     var activeLink = document.get_exercise_by_id("id");
                     activeLink.classList.add("active");  
-                 </script>
-
-                
-                
-           <!--profile image & text-->
-            <!--menu item-->
-        </div>
-        <div class="wrapper2">
-            <!--Top menu -->                                                 
-            <div class="sidebar-card">
-                <img src="https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg" alt="Image" class="sidebar-card-image">
-                <div class="sidebar-card-content">
-                  <h3 class="sidebar-card-title">Card Title1</h3>
-                  <p class="sidebar-card-description">Card Description goes here. It can be multiple lines of text.</p>
+                </script>
+            </ul>
+		</div>
+        
+		<div class="middle-section">
+            <div class="card-container">
+                {% for exercise in exercises_list %}
+                <div class="card">
+                    <img src="https://wger.de/media/exercise-images/{{exercise.exercise_id}}/{{exercise.name.replace(' ', '-')}}-1.png" onerror=this.src='https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg' alt="Image" class="card-image">
+                    <div class="card-content">
+                        <h3 class="card-title">{{exercise.name}}</h3>
+                        <form method = "POST" action = "/exercise/{{exercise.id}}">
+                            <input type="text" name="exerciseSet_name" class="form-input" placeholder="Enter exercise set name" style="color: #000;" />
+                            <button type="submit" class="form-button">Submit</button>
+                        </form>
+                        <div class="card-description-dropdown">
+                            <p class="card-description">{{exercise.description}}</p>
+                        </div>
+                            <!-- <p class="card-description">{{exercise.description}}</p> -->
+                    </div>
+                    <!-- </div> -->
                 </div>
-              </div>
-        </div>
-
-        <!-- renders all the cards for the list of exercises -->
-    </div>
-
-        <div class="card-container">
-            {% for exercise in exercises_list %}
-            <div class="card">
-                <img src="https://wger.de/media/exercise-images/{{exercise.exercise_id}}/{{exercise.name.replace(' ', '-')}}-1.png" onerror=this.src='https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg' alt="Image" class="card-image">
-                <div class="card-content">
-                <h3 class="card-title">{{exercise.name}}</h3>
-                <p class="card-description">{{exercise.description}}</p>
-                </div>
+                {% endfor %}
             </div>
+            <script> 
+                // I ask chatgpt how to make it so that if the image not available we can use a different one
+                // the api had only a little bit of images so we could get some kind of placeholders idk
+                var img = document.getElementById('card-image');
+                img.onerror = function() {
+                    img.src = 'https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg';
+                }
+            </script>
+
+		<!-- </div> -->
+		<div class="right-section" style="overflow-y: auto;">
+
+            <div class="profile">
+                <!-- <img src="https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg" alt="Image" class="sidebar-card-image"> -->
+
+                <h5>EXERCISE SETS</h5>
+            </div>
+
+            {% for exerciseSet in exerciseSets %}
+            <div class="sidebar-card">
+                <!-- <img src="https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg" alt="Image" class="sidebar-card-image"> -->
+                
+                <div class="sidebar-card-content">
+                    
+                    <img src="https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg" alt="Image" class="sidebar-card-image">
+                    <a href="/exerciseSet/{{exerciseSet.id}}" id="exerciseSet-{{exerciseSet.id}}"> 
+                        <h3 class="sidebar-card-title">{{exerciseSet.name}}</h3>
+                    </a>
+                    <!-- <h3 class="sidebar-card-title">{{exerciseSet.name}}</h3> -->
+                    <!-- <p class="sidebar-card-description">Card Description goes here. It can be multiple lines of text.</p> -->
+                    </div>
+                </div>
             {% endfor %}
-        </div>
+            
+		</div>
 
-  <script>
-    // I ask chatgpt how to make it so that if the image not available we can use a different one
-    // the api had only a little bit of images so we could get some kind of placeholders idk
+        <script>
+            var exerciseSetElem = document.getElementById('exerciseSet-1'); // edit to scroll to selected pokemon
+            exerciseSetElem.scrollIntoView();
+        </script>
 
-    var img = document.getElementById('card-image');
-    img.onerror = function() {
-        img.src = 'https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg';
-    }
-
-  </script>
+	</div>
 </body>
 
+
+
 {% endblock %}
+<!-- hi sabrina -->
+
+<!-- hello again sabrina -->
+
+<!-- hello again again sabrina -->
+
