@@ -19,3 +19,7 @@ def get_exercises_action():
     exercises = get_all_exercises_json()
     return jsonify(exercises)
 
+# @user_views.route('/api/users', methods=['GET'])
+# def get_users_action():
+#     users = get_all_users_json()
+#     return jsonify(users)
