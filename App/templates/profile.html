@@ -1,11 +1,19 @@
 {% extends "layout.html" %}
-{% block title %}Profile{% endblock %}
+{% block title %}EXERCISE INFO{% endblock %}
 {% block page %}EnduranceEmpire{% endblock %}
 
 {{ super() }}
 
 {% block content %}
-
-
+<body>
+    <div class="exercise-container">
+        <img class="exercise-image" src="https://thumbs.dreamstime.com/b/fitness-gym-vector-flat-style-design-illustration-young-man-woman-training-girl-running-treadmill-boy-exercising-177288408.jpg" alt="Exercise Image">
+        <h2 class="exercise-name">{{cise.name}}</h2>
+        {% if cise.description %}
+        <h4 class="exercise-description">{{cise.description}}</p>
+        {% else %}
+        <h4 class="exercise-description">No Description</p>
+        {% endif %}
+</body>
 
 {% endblock %}

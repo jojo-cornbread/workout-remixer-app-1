@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 <header>
-    {% block title %}Flask MVC App{% endblock %}
+    {% block title %}HOME{% endblock %}
     {% block page %}EnduranceEmpire{% endblock %}
     {{ super() }}
 
@@ -17,17 +17,11 @@
                 </div>
                 <li>
                     {% for category in categories %}
-                    <a href="/app/{{category['id']}}">
-                        <!-- abs has an id of 10 -->
-                        <!-- the href link would have to go to the route that renders the exercises -->
-                        <span class="icon"></span>
-                        <span class="item">{{category['name']}}</span>
-                    </a>
+                        <a href="/app/{{category['id']}}">
+                            <span class="icon"></span>
+                            <span class="item">{{category['name']}}</span>
+                        </a>
                     {% endfor %}
-                    <!-- <a href="#">
-                        <span class="icon"></span>
-                        <span class="item">LEGS</span>
-                    </a> -->
                 </li>
                 <script>
                     var activeLink = document.get_exercise_by_id("id");
@@ -39,78 +33,59 @@
 		<div class="middle-section">
             <div class="card-container">
                 {% for exercise in exercises_list %}
-                <div class="card">
-                    <!-- <img src="https://wger.de/media/exercise-images/{{exercise.exercise_id}}/{{exercise.name.replace(' ', '-')}}-1.png" onerror=this.src='https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg' alt="Image" class="card-image"> -->
-                    {% if exercise.category == 10 %}
-                        <img src="https://img.myloview.com/posters/man-doing-crunches-in-the-gym-belly-burn-workout-guy-make-exercise-abs-workout-healthy-and-active-lifestyle-isolated-vector-illustration-700-227189232.jpg" alt="Image" class="card-image">
-                    {% elif exercise.category == 8 %}
-                        <img src="https://media.istockphoto.com/id/1408265089/vector/woman-doing-big-arm-circles-exercise-flat-vector-illustration-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=EvV2wN57DEeNmAOItQP08uhD4ll45c1IsvRR_HIKEco=" alt="Image" class="card-image">
+                    <div class="card">
+                        {% if exercise.category == 10 %}
+                            <img src="https://img.myloview.com/posters/man-doing-crunches-in-the-gym-belly-burn-workout-guy-make-exercise-abs-workout-healthy-and-active-lifestyle-isolated-vector-illustration-700-227189232.jpg" alt="Image" class="card-image">
+                        {% elif exercise.category == 8 %}
+                            <img src="https://media.istockphoto.com/id/1408265089/vector/woman-doing-big-arm-circles-exercise-flat-vector-illustration-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=EvV2wN57DEeNmAOItQP08uhD4ll45c1IsvRR_HIKEco=" alt="Image" class="card-image">
                         {% elif exercise.category == 12 %}
-                        <img src="https://media.istockphoto.com/id/1094563964/vector/woman-doing-bird-dog-exercise-to-train-core-muscle-on-blue-mat.jpg?s=612x612&w=0&k=20&c=Qpo-S9K6Wv4V5tOS_9HzzqCfmpa3tro2gcx74qiQ3Uo=" alt="Image" class="card-image">
+                            <img src="https://media.istockphoto.com/id/1094563964/vector/woman-doing-bird-dog-exercise-to-train-core-muscle-on-blue-mat.jpg?s=612x612&w=0&k=20&c=Qpo-S9K6Wv4V5tOS_9HzzqCfmpa3tro2gcx74qiQ3Uo=" alt="Image" class="card-image">
                         {% elif exercise.category == 14 %}
-                        <img src="https://media.istockphoto.com/id/1162991838/vector/woman-doing-exercise-with-low-lunge-pose.jpg?s=612x612&w=0&k=20&c=7uRCl-S0cqa0dvWyZKWSWp1Chrx8Wu93RH7ixazjrGQ=" alt="Image" class="card-image">
+                            <img src="https://media.istockphoto.com/id/1162991838/vector/woman-doing-exercise-with-low-lunge-pose.jpg?s=612x612&w=0&k=20&c=7uRCl-S0cqa0dvWyZKWSWp1Chrx8Wu93RH7ixazjrGQ=" alt="Image" class="card-image">
                         {% elif exercise.category == 15 %}
-                        <img src="https://img.freepik.com/premium-vector/image-girl-treadmill-concept-cardio-exercise-simulators-vector-illustration_650087-110.jpg?w=2000" alt="Image" class="card-image">
+                            <img src="https://img.freepik.com/premium-vector/image-girl-treadmill-concept-cardio-exercise-simulators-vector-illustration_650087-110.jpg?w=2000" alt="Image" class="card-image">
                         {% elif exercise.category == 11 %}
-                        <img src="https://www.wikihow.com/images/thumb/9/90/Work-Out-Your-Upper-Chest-Step-11-Version-3.jpg/v4-460px-Work-Out-Your-Upper-Chest-Step-11-Version-3.jpg" alt="Image" class="card-image">
+                            <img src="https://www.wikihow.com/images/thumb/9/90/Work-Out-Your-Upper-Chest-Step-11-Version-3.jpg/v4-460px-Work-Out-Your-Upper-Chest-Step-11-Version-3.jpg" alt="Image" class="card-image">
                         {% elif exercise.category == 9 %}
-                        <img src="https://static.vecteezy.com/system/resources/thumbnails/008/954/618/small/leg-stretching-animation-footage-man-stretching-leg-for-daily-muscle-workout-4k-animation-young-boy-doing-rainbow-exercise-for-hip-muscles-and-good-health-animated-free-video.jpg" alt="Image" class="card-image">
+                            <img src="https://static.vecteezy.com/system/resources/thumbnails/008/954/618/small/leg-stretching-animation-footage-man-stretching-leg-for-daily-muscle-workout-4k-animation-young-boy-doing-rainbow-exercise-for-hip-muscles-and-good-health-animated-free-video.jpg" alt="Image" class="card-image">
                         {% elif exercise.category == 13 %}
-                        <img src="https://media.istockphoto.com/id/1459531729/vector/man-stretching-her-neck-arms-and-shoulders-hand-flat-vector-illustration-isolated-on-white.jpg?s=612x612&w=0&k=20&c=7PHwyaEF70UvmgLfD-jYeZ4sIya_jeUjfxqY7vytUUU=" alt="Image" class="card-image">
+                            <img src="https://media.istockphoto.com/id/1459531729/vector/man-stretching-her-neck-arms-and-shoulders-hand-flat-vector-illustration-isolated-on-white.jpg?s=612x612&w=0&k=20&c=7PHwyaEF70UvmgLfD-jYeZ4sIya_jeUjfxqY7vytUUU=" alt="Image" class="card-image">
                         {% endif %}
                         <div class="card-content">
-                        <h3 class="card-title">{{exercise.name}}</h3>
-                        <form method="POST" action="/add-exerciseSet/{{exercise.id}}">
-                            <!-- <input type="text" name="exerciseSet_name" class="form-input" placeholder="Enter exercise set name" style="color: #000;" /> -->
-                            <button type="submit" class="form-button">Add</button>
-                        </form>
-                        <input type="checkbox" id="dropdown-toggle-{{exercise.id}}" class="card-description-toggle">
-                        <label for="dropdown-toggle-{{exercise.id}}" class="card-description-label">Click to Show Description</label>
-                        <p class="card-description">{{exercise.description}}</p>
+                            <h3 class="card-title">{{exercise.name}}</h3>
+                            <form method="POST" action="/add-exerciseSet/{{exercise.id}}">
+                                <input type="text" name="exerciseSet_name" class="form-input" placeholder="Enter exercise set name" style="color: #000;" />
+                                <button type="submit" class="form-button">Add to Set</button>
+                            </form>
+                            <input type="checkbox" id="dropdown-toggle-{{exercise.id}}" class="card-description-toggle">
+                            <label for="dropdown-toggle-{{exercise.id}}" class="card-description-label">Click to Show Description</label>
+                            <p class="card-description">{{exercise.description}}</p>
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
-            <!-- <script> 
-                // I ask chatgpt how to make it so that if the image not available we can use a different one
-                // the api had only a little bit of images so we could get some kind of placeholders idk
-                var img = document.getElementById('card-image');
-                img.onerror = function() {
-                    img.src = 'https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg';
-                }
-            </script> -->
+    
 		</div>
 
 		<div class="right-section" style="overflow-y: auto;">
 
             <div class="profile">
-                <!-- <img src="https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg" alt="Image" class="sidebar-card-image"> -->
-
                 <h5>EXERCISE SETS</h5>
             </div>
 
             {% for exerciseSet in exerciseSets %}
-            <div class="sidebar-card">
-                <!-- <img src="https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg" alt="Image" class="sidebar-card-image"> -->
-                
-                <div class="sidebar-card-content">
-                    
-                    <img src="https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg" alt="Image" class="sidebar-card-image">
-                    <!-- may need to change href below -->
-                    <a href="/exerciseSet-info/{{exerciseSet.name}}" id="exerciseSet-{{exerciseSet.id}}"> 
-                        <h3 class="sidebar-card-title">{{exerciseSet.name}}</h3>
-                    </a>
-
-                    <div class="card-action">
-                        <a href="/delete-exerciseSet/{{exerciseSet.id}}" id = "Delete--{{exerciseSet.name}}">DELETE</a>
+                <div class="sidebar-card">
+                    <div class="sidebar-card-content">
+                        <img src="https://thumbs.dreamstime.com/b/fitness-gym-vector-flat-style-design-illustration-young-man-woman-training-girl-running-treadmill-boy-exercising-177288408.jpg" alt="Image" class="sidebar-card-image">
+                        <a href="/exerciseSet-info/{{exerciseSet.name}}" id="exerciseSet-{{exerciseSet.id}}"> 
+                            <h3 class="sidebar-card-title">{{exerciseSet.name}}</h3>
+                        </a>
+                        <div class="card-action">
+                            <a href="/delete-exerciseSet/{{exerciseSet.id}}" id = "Delete--{{exerciseSet.name}}">DELETE</a>
+                        </div>
                     </div>
-                    <!-- <h3 class="sidebar-card-title">{{exerciseSet.name}}</h3> -->
-                    <!-- <p class="sidebar-card-description">Card Description goes here. It can be multiple lines of text.</p> -->
                 </div>
-            </div>
-
             {% endfor %}
-            
 		</div>
 
         <script>
@@ -121,14 +96,4 @@
 	</div>
 </body>
 
-
-
 {% endblock %}
-<!-- hi sabrina -->
-
-<!-- hello again sabrina -->
-
-<!-- hello again again sabrina -->
-
-
-<!-- that was scaaary -->

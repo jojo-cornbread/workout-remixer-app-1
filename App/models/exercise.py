@@ -3,11 +3,9 @@ from App.database import db
 class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    exercise_id = db.Column(db.Integer, nullable=False)
+    set_id = db.Column(db.Integer, db.ForeignKey('exercise_set.id'))
     description = db.Column(db.String, nullable=True)
     category = db.Column(db.Integer, nullable=False)
-
-    
 
     # get_json function
     def get_json(self):

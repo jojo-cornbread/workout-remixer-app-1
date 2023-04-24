@@ -116,15 +116,15 @@ def static_user_page():
   
 @user_views.route('/user_info', methods=['GET', 'POST'])
 def userInfo_page():
-  exercises = []
+  sets = []
   user = current_user
   xss = get_all_exerciseSets()
   for xs in xss:
     if xs.user_id == user.id:
-      exercises.append(get_exercise_by_id( xs.exercise_id))
+      sets.append(xs)
   cises = get_all_exercises()
-  return render_template('user_info.html', user=user, xss=xss, cises=cises, exercises=exercises)
+  return render_template('user_info.html', user=user, sets=sets, cises=cises)
 
-@user_views.route('/profile', methods=['GET'])
+@user_views.route('/sets', methods=['GET'])
 def get_profile():
-    return render_template('profile.html')
+    return render_template('sets.html')

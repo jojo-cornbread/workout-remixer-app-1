@@ -1,13 +1,11 @@
 from App.database import db
+from .exercise import Exercise
 
 class ExerciseSet(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    exercise_id = db.Column(db.Integer, db.ForeignKey('exercise.id'))
-    name = db.Column(db.String, nullable = False)
-
-    # , unique=True
-    # ???
+    exercises = db.relationship('Exercise', backref='exercise_set', lazy="dynamic")
     exercise = db.relationship('Exercise')
 
     def __init__(self, user_id, exercise_id, name):
@@ -28,17 +26,3 @@ class ExerciseSet(db.Model):
         }
 
 
-#     def __init__(self, user_id, pokemon_id, name):
-#     self.user_id = user_id
-#     self.pokemon_id = pokemon_id
-#     self.name = name
-  
-#   def __repr__(self):
-#       return f'<UserPokemon {self.id} : {self.name} trainer {self.user.username}>'
-
-# def get_json(self):
-#     return{
-#       'id': self.id,
-#       'name': self.name,
-#       'species': self.pokemon.name
-#     }

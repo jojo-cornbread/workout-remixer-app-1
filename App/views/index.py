@@ -3,7 +3,16 @@ from App.models import db
 from App.controllers import create_user
 
 from App.models import *
-from App.controllers import (add_exerciseSet, delete_exerciseSet, get_all_exerciseSets_json, get_exercise_by_id)
+from App.controllers import (
+    add_exerciseSet, 
+    delete_exerciseSet, 
+    get_all_exerciseSets, 
+    get_all_exerciseSets_json, 
+    get_exercise_by_id, 
+    add_exercise_to_set,
+    get_exerciseSet_by_name,
+    get_exercise_by_name,
+)
 
 from flask_jwt_extended import jwt_required, current_user as jwt_current_user
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
@@ -31,23 +40,9 @@ def index_page(category = 10):
         exercises_list = Exercise.query.filter_by(category=category)
 
         exerciseSets = ExerciseSet.query.filter_by(user_id = current_user.id)
-        # exerciseSets_list = get_all_exerciseSets_json()
-
-        # exerciseSets = set()
-
-        # for exerciseSet in exerciseSets_list:
-        #     exerciseSets.add(exerciseSet['name'])
-
-        # for(exerciseSet in exerciseSets_list):
-        #     if(exerciseSet.name)
-
-        # return jsonify(categories)
-
+       
     return render_template('index.html', categories = categories, exercises_list = exercises_list, exerciseSets = exerciseSets, user=user)
 
-    # return something if the response bad?
-    # else:
-    #     return
 
 @index_views.route('/add-exerciseSet/<int:id>', methods=['POST'])
 @login_required
@@ -57,12 +52,22 @@ def add_ExerciseSet_action(id):
     user = current_user
     exercise = get_exercise_by_id(id)
 
-    # do a check for if the exercise set exist already
-    # exerciseSet = get_exerciseSet_by_name(name)
-    # if exerciseSet is not None:
-    #     test = 1
+    setName = data['exerciseSet_name']
 
-    add_exerciseSet(exercise.name ,user.id, id)
+    # do a check for if the exercise set exist already
+    sets = []
+    xss = get_all_exerciseSets()
+    for xs in xss:
+        if xs.user_id == user.id:
+            sets.append(xs)
+
+    for set in sets:
+        if set.name == setName:
+            flash("Exercise added to set!")
+            add_exercise_to_set(set.id, id)
+            return redirect('/app')
+    
+    add_exerciseSet(setName, user.id, id)
 
     if user:
         flash("Exercise added to Set!")
@@ -70,21 +75,6 @@ def add_ExerciseSet_action(id):
         flash("Unauthorized")
     return redirect(url_for('index_views.index_page'))
 
-# capture route from assignment2
-# @app.route('/pokemon/<pokemon_id>', methods = ['POST'])
-# @login_required
-# def capture_pokemon_action(pokemon_id):
-#   data = request.form
-#   # pokemon = Pokemon.query.all()
-#   # userPokemon = UserPokemon.query.filter_by(pokemon_id = id)
-#   user = current_user
-#   user.catch_pokemon(pokemon_id, data['pokemon_name'])
-    
-#   if user:
-#     flash("Pokemon captured!")
-#   else:
-#     flash("Unauthorized")
-#   return redirect(url_for('home_page'))
 
 @index_views.route('/delete-exerciseSet/<int:exerciseSet_id>', methods=['GET'])
 @login_required
@@ -100,54 +90,53 @@ def delete_exerciseSet_action(exerciseSet_id):
         flash('exercise set deleted!')
     return redirect(url_for('index_views.index_page'))
 
+@index_views.route('/delete-exercise/<int:exercise_id>', methods=['GET'])
+@login_required
+def delete_exercise_action(exercise_id):
+    
+    user = current_user
+
+    res = delete_exerciseSet(exercise_id)
+
+    if res == None:
+        flash('Invalid or unauthorized')
+    else:
+        flash('exercise deleted!')
+    return redirect(url_for('user_views.userInfo_page'))
+
 @index_views.route('/exerciseSet-info/<exerciseSet_name>', methods=['GET'])
 @login_required
 def get_exerciseSet_data_action(exerciseSet_name):
-
     user = current_user
 
-    exerciseSets = get_all_exerciseSets_json()
+    eSet = get_exerciseSet_by_name(exerciseSet_name)
+    cises = []
 
-    exerciseList = []
-    # exerciseSets = [exerciseSet.get_json() for exerciseSet in exerciseSets]
-
-    for exerciseSet in exerciseSets:
-        if exerciseSet['name'] == exerciseSet_name:
-            exerciseList.append(exerciseSet)
+    for exercise in eSet.exercises:
+        cises.append(exercise)
 
     if user:
-        return render_template('user_info.html', exerciseList = exerciseList)
+        return render_template('sets.html', set=eSet, cises=cises)
         
     else:
         flash('Invalid or unauthorize')
         return rediect(url_for('index_views.index_oage'))
 
-# @app.route('/release-pokemon/<poke_user_id>', methods = ['GET'])
-# @login_required 
-# def release_pokemon_action(poke_user_id):
-#   # pokemonName = UserPokemon.query.filter_by()
-#   res = current_user.release_pokemon(poke_user_id)
+@index_views.route('/exercise-info/<exercise>', methods=['GET'])
+@login_required
+def exercise_info(exercise):
+    user = current_user
 
-#   if res == None:
-#     flash('Invalid or unauthorized')
-#   else:
-#     flash('Pokemon Released!')
-#   return redirect(url_for('home_page'))
+    cise = get_exercise_by_name(exercise)
 
-# @index_views.route('/init', methods=['GET'])
-# def init():
-#     db.drop_all()
-#     db.create_all()
-#     create_user('bob', 'bobpass')
-#     return jsonify(message='db initialized!')
+    if user:
+        return render_template('profile.html', cise=cise)
+        
+    else:
+        flash('Invalid or unauthorize')
+        return rediect(url_for('index_views.index_oage'))
+
 
 @index_views.route('/health', methods=['GET'])
 def health_check():
     return jsonify({'status':'healthy'})
-
-# hi
-# helloo
-
-# helllo again
-# helllooooooooooooooooooooooooooooooooooooooo
-#yayyyyyyyyyyyyyyyyyyyyyyyyyyyy

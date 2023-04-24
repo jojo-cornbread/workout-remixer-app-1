@@ -51,56 +51,8 @@ def delete_exerciseSet(exerciseSet_id):
             db.session.commit()
         return True
     return None
-
-# def release_pokemon(self, poke_id):
-#     poke = UserPokemon.query.get(poke_id)
-#     if poke.user == self:
-#       db.session.delete(poke)
-#       db.session.commit()
-#       return True
-#     return None
-
-#   def rename_pokemon(self, poke_id, name):
-#     poke = UserPokemon.query.get(poke_id)
-#     if poke.user == self:
-#       poke.name = name
-#       db.session.add(poke)
-#       db.session.commit()
-#       return True
-#     return None
-
-# def add_exerciseSet(name, user_id, exercise_id):
-#     exercise = Exercise.query.get(exercise_id)
-#     # exercise = get_exercise_by_id(exercise_id)
-
-#     if exercise:
-#         try:
-#             print('test1')
-#             exerciseSet = create_exerciseSet(name=name, user_id=user_id, exercise_id=exercise_id)
-#             print('test2')
-#             return exerciseSet
-#         except SpecificException as e:
-#             print('Error: {}'.format(e))
-#             db.session.rollback()
-#             return None
-#     else:
-#         print('Exercise not found')
-#         return None
-
-
-#  def catch_pokemon(self, pokemon_id, name):
-#     poke = Pokemon.query.get(pokemon_id)
-#     if poke:
-#       try:
-#         pokemon = UserPokemon(self.id, pokemon_id, name)
-#         db.session.add(pokemon)
-#         db.session.commit()
-#         return pokemon
-#       except Exception:
-#         db.session.rollback()
-#         return None
-#     return None
-
+    
+    
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
 
