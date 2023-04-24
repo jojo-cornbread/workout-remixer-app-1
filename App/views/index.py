@@ -3,7 +3,7 @@ from App.models import db
 from App.controllers import create_user
 
 from App.models import *
-from App.controllers import (add_exerciseSet, delete_exerciseSet, get_all_exerciseSets_json)
+from App.controllers import (add_exerciseSet, delete_exerciseSet, get_all_exerciseSets_json, get_exercise_by_id)
 
 from flask_jwt_extended import jwt_required, current_user as jwt_current_user
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
@@ -17,8 +17,8 @@ index_views = Blueprint('index_views', __name__, template_folder='../templates')
 @index_views.route('/app/<int:category>', methods=['GET'])
 #need to set up login things
 @login_required
-def index_page(category = 1):
-
+def index_page(category = 10):
+    user = current_user
     url = 'https://wger.de/api/v2/exercisecategory/?format=json'
 
     response = requests.get(url)
@@ -43,7 +43,7 @@ def index_page(category = 1):
 
         # return jsonify(categories)
 
-    return render_template('index.html', categories = categories, exercises_list = exercises_list, exerciseSets = exerciseSets)
+    return render_template('index.html', categories = categories, exercises_list = exercises_list, exerciseSets = exerciseSets, user=user)
 
     # return something if the response bad?
     # else:
@@ -55,13 +55,14 @@ def add_ExerciseSet_action(id):
     data = request.form
 
     user = current_user
+    exercise = get_exercise_by_id(id)
 
     # do a check for if the exercise set exist already
     # exerciseSet = get_exerciseSet_by_name(name)
     # if exerciseSet is not None:
     #     test = 1
 
-    add_exerciseSet(data['exerciseSet_name'], user.id, id)
+    add_exerciseSet(exercise.name ,user.id, id)
 
     if user:
         flash("Exercise added to Set!")

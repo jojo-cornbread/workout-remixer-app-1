@@ -35,13 +35,16 @@ def initialize():
     db.create_all()
     create_user('bob','bob@mail.com', 'bobpass')
 
+    print('database intialized')
+
+@app.cli.command("get-data", help="Creates and initializes the data from the api")
+def get_data():
     # add all the exercises here
     url = 'https://wger.de/api/v2/exercise/?format=json&limit=800'
 
     # https://wger.de/api/v2/exercise/?format=json&limit=200 sets the amount of exercises
     # to a limit of 200, the limit can be altered or removed
     
-
     response = requests.get(url)
 
     # Check if the request was successful
@@ -61,7 +64,7 @@ def initialize():
         for i in range (len(data['results'])):
             
             if(data['results'][i]['id']) == 91:
-                    print(data['results'][i]['name'])
+                    print(data['results'][i]['description'])
 
 
             if(data['results'][i]['language'] == 2):
@@ -69,9 +72,7 @@ def initialize():
                 # print(data['results'][i]['name'])
                 create_exercise(data['results'][i]['name'],data['results'][i]['id'], data['results'][i]['description'], data['results'][i]['category'])
 
-                
-
-
+            
         # NOW YOU CAN ADD IN THE EXERCISES TO THE DATABASE BY FILTERING THE INFORMATION NEEDED
     
     # add in methods to the user controller to add exercises to a set,
@@ -89,8 +90,6 @@ def initialize():
     # print(testExerciseID['id'])
 
     add_exerciseSet(exerciseSetName ,user['id'], testExerciseID['id'])
-
-    print('database intialized')
 
 '''
 User Commands
@@ -167,8 +166,6 @@ def sort_name_exerciseSet_command(name):
                 print(exerciseSet)
 
 app.cli.add_command(exerciseSet_cli)
-
-
 
 '''
 Test Commands

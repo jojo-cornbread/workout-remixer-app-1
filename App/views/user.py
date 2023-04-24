@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, jsonify, request, send_from_directory, flash, redirect, url_for
 from flask_jwt_extended import jwt_required, current_user as jwt_current_user
-from flask_login import current_user, login_required, login_user
+from flask_login import current_user, login_required, login_user, logout_user
 
 from.index import index_views
 
@@ -14,17 +14,20 @@ from App.controllers import (
     jwt_authenticate, 
     get_all_users,
     get_all_users_json,
-    jwt_required
+    jwt_required,
+    get_all_exerciseSets,
+    get_all_exercises,
+    get_exercise_by_id,
 )
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
-
-
 @user_views.route('/', methods=['GET'])
 @user_views.route('/login', methods=['GET'])
 def login_page():
-  return render_template('login.html')
+  if current_user.is_authenticated:
+    return redirect('/app')
+  return render_template('login.html', user=user)
 
 @user_views.route('/login', methods=['POST'])
 def login_action():
@@ -37,6 +40,11 @@ def login_action():
     return redirect('/app')  # redirect to main page if login successful
   else:
     flash('Invalid username or password')  # send message to next page
+  return redirect('/')
+
+@user_views.route('/logout', methods=['GET'])
+def logout_action():
+  logout_user()
   return redirect('/')
 
 @user_views.route('/signup', methods=['GET'])
@@ -106,6 +114,17 @@ def static_user_page():
   return send_from_directory('static', 'static-user.html')
 
   
-@user_views.route('/user_info', methods=['GET'])
+@user_views.route('/user_info', methods=['GET', 'POST'])
 def userInfo_page():
-  return render_template('user_info.html')
+  exercises = []
+  user = current_user
+  xss = get_all_exerciseSets()
+  for xs in xss:
+    if xs.user_id == user.id:
+      exercises.append(get_exercise_by_id( xs.exercise_id))
+  cises = get_all_exercises()
+  return render_template('user_info.html', user=user, xss=xss, cises=cises, exercises=exercises)
+
+@user_views.route('/profile', methods=['GET'])
+def get_profile():
+    return render_template('profile.html')

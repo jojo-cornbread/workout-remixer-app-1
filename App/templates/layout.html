@@ -18,10 +18,15 @@
         <a href="#!" class="brand-logo center">{% block page %}{% endblock %}</a>
         <div class="nav-wrapper">
             <ul id="nav-mobile" class="left">
-                <li><a href="/">Home</a></li>
+                <li class=""><a href="/">Home</a></li>
+                {% if current_user.is_authenticated %}
+                <li><a href="/logout">Logout</a></li>
+                <li><a href="/user_info">MySpace</a></li>
+                {% else %}
                 <li><a href="/signup">SignUp</a></li>
                 <li><a href="/login">Login</a></li>
-                <li><a href="/user_info">MySpace</a></li>
+                {% endif %}
+                
                 <!-- <li><a href="/static/users">Users JS</a></li> -->
             </ul>
         </div>

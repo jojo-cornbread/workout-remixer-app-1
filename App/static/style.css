@@ -14,6 +14,14 @@
   background-size:cover;
 }
 
+.userInfo_page{
+  background-color: rgb(5, 68, 104);;
+  background-repeat:no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size:cover;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -57,7 +65,7 @@ body {
 .wrapper .left-section{
   background: rgb(5, 68, 104);
   position: fixed;
-  top: 10;
+  top: 30;
   left: 0;
   width: 225px;
   height: 100%;

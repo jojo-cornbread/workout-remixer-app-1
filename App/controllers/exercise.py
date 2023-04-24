@@ -7,6 +7,15 @@ def create_exercise(name,exercise_id, description, category):
     db.session.commit()
     return newExercise
 
+def update_exercise(id, name):
+    cise = get_exercise_by_id(id)
+    if cise:
+        cise.name = name
+        db.session.add(cise)
+        db.session.commit()
+        return True
+    return False
+
 def get_exercise_by_name(name):
     return Exercise.query.filter_by(name=name).first()
 

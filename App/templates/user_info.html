@@ -9,17 +9,36 @@
     <div class="content fill-space">
       <div class="subcontent center-vertical">
         <h4 class="center">MySpace</h4>
+        <br>
         <div class="card-container2">
-            {% for exercise in exerciseList %}
+            {% for exercise in exercises%}
+
             <div class="card2">
-                <img src="https://wger.de/media/exercise-images/{{exercise['exercise_id']}}/{{exercise['exercise'].replace(' ', '-')}}-1.png" alt="Image" class="card-image">
+                {% if exercise.category == 10 %}
+                <img src="https://img.myloview.com/posters/man-doing-crunches-in-the-gym-belly-burn-workout-guy-make-exercise-abs-workout-healthy-and-active-lifestyle-isolated-vector-illustration-700-227189232.jpg" alt="Image" class="card-image">
+                {% elif exercise.category == 8 %}
+                <img src="https://media.istockphoto.com/id/1408265089/vector/woman-doing-big-arm-circles-exercise-flat-vector-illustration-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=EvV2wN57DEeNmAOItQP08uhD4ll45c1IsvRR_HIKEco=" alt="Image" class="card-image">
+                {% elif exercise.category == 12 %}
+                <img src="https://media.istockphoto.com/id/1094563964/vector/woman-doing-bird-dog-exercise-to-train-core-muscle-on-blue-mat.jpg?s=612x612&w=0&k=20&c=Qpo-S9K6Wv4V5tOS_9HzzqCfmpa3tro2gcx74qiQ3Uo=" alt="Image" class="card-image">
+                {% elif exercise.category == 14 %}
+                <img src="https://media.istockphoto.com/id/1162991838/vector/woman-doing-exercise-with-low-lunge-pose.jpg?s=612x612&w=0&k=20&c=7uRCl-S0cqa0dvWyZKWSWp1Chrx8Wu93RH7ixazjrGQ=" alt="Image" class="card-image">
+                {% elif exercise.category == 15 %}
+                <img src="https://img.freepik.com/premium-vector/image-girl-treadmill-concept-cardio-exercise-simulators-vector-illustration_650087-110.jpg?w=2000" alt="Image" class="card-image">
+                {% elif exercise.category == 11 %}
+                <img src="https://www.wikihow.com/images/thumb/9/90/Work-Out-Your-Upper-Chest-Step-11-Version-3.jpg/v4-460px-Work-Out-Your-Upper-Chest-Step-11-Version-3.jpg" alt="Image" class="card-image">
+                {% elif exercise.category == 9 %}
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/008/954/618/small/leg-stretching-animation-footage-man-stretching-leg-for-daily-muscle-workout-4k-animation-young-boy-doing-rainbow-exercise-for-hip-muscles-and-good-health-animated-free-video.jpg" alt="Image" class="card-image">
+                {% elif exercise.category == 13 %}
+                <img src="https://media.istockphoto.com/id/1459531729/vector/man-stretching-her-neck-arms-and-shoulders-hand-flat-vector-illustration-isolated-on-white.jpg?s=612x612&w=0&k=20&c=7PHwyaEF70UvmgLfD-jYeZ4sIya_jeUjfxqY7vytUUU=" alt="Image" class="card-image">
+                {% endif %}
                 <div class="card-content">
-                    <h3 class="card-title">{{exercise['exercise']}}</h3>
-                    <input type="checkbox" id="dropdown-toggle" class="card-description-toggle">
-                    <label for="dropdown-toggle" class="card-description-label">Click to Show Description</label>
-                    <p class="card-description">Jump</p>
+                    <h3 class="card-title">{{exercise.name}}</h3>
+                    <input type="checkbox" id="dropdown-toggle-{{exercise.id}}" class="card-description-toggle">
+                    <label for="dropdown-toggle-{{exercise.id}}" class="card-description-label">Click to Show Description</label>
+                    <p class="card-description">{{ exercise.description }}</p>
                 </div>
             </div>
+
             {% endfor %}
             <!-- <div class="card2">
                 <img src='https://cdn.iphonewired.com/wp-content/uploads/2021/12/1638941974_600x600bb.jpg' alt="Image" class="card-image">
