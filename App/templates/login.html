@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block page %}EnduranceEmpire{% endblock %}
+
+
+{% block content %}
+<body  class = "Login_page">
+  <div class="content fill-space">
+    <div class="subcontent center-vertical">
+      <h4 class="center">Login</h4>
+  
+      <form id="loginForm" method="POST" action="/login" style="padding:1em">
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="Username" name="username" type="text" class="validate">
+          <label for="username">Username</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="Email" name="email" type="text" class="validate">
+          <label for="email">Email</label>
+          </div>
+        </div>
+    
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="password" name="password" type="password" class="validate">
+          <label for="password">Password</label>
+          </div>
+        </div>
+          <div class="col s3 card-action right-align">
+            <input type="submit" class="blue text-white btn" value="login">
+          </div>
+          <div class="col s8 card-action right-align">
+            <a href="/users">Don't have an account? Sign Up</a>
+          </div>
+        </div>
+{% endblock %}
