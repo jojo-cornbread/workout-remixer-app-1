@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}MySpace{% endblock %}
+{% block page %}EnduranceEmpire{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+<body  class = "userInfo_page">
+    <div class="content fill-space">
+      <div class="subcontent center-vertical">
+        <h4 class="center">My Sets</h4>
+        <br>
+        <div class="card-container2">
+            {% for set in sets%}
+
+            <div class="card2">
+                <img src="https://thumbs.dreamstime.com/b/fitness-gym-vector-flat-style-design-illustration-young-man-woman-training-girl-running-treadmill-boy-exercising-177288408.jpg" alt="Image" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title"><a href="/exerciseSet-info/{{set.name}}">{{set.name}}</a></h3> 
+                </div>
+                <div class="card-action">
+                    <a href="" id = "Delete--{{set.id}}">DELETE SET</a>
+                </div>
+            </div>
+            
+            {% endfor %}
+        </div>
+        <a href="/app" id="backButton" class="btn1">Back</a>
+</body>
+{% endblock %}

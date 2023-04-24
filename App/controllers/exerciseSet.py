@@ -1,16 +1,28 @@
 from App.models import ExerciseSet
 from App.database import db
 
+from App.controllers import (
+    get_exercise_by_id,
+)
+
 def create_exerciseSet(name, user_id, exercise_id):
     newExerciseSet = ExerciseSet(user_id=user_id, exercise_id=exercise_id, name=name)
     db.session.add(newExerciseSet)
     db.session.commit()
-    # print('new exercise set created')
     return newExerciseSet
 
-# different methods we may need later on
-# get_exerciseSet_user()
 
+def add_exercise_to_set(set_id, exercise_id):
+    eSet = get_exerciseSet_by_id(set_id)
+    cise = get_exercise_by_id(exercise_id)
+    if eSet:
+        if cise:
+            eSet.exercises.append(cise)
+            db.session.add(eSet)
+            db.session.commit()
+            return eSet
+    return False
+    
 
 def get_exerciseSet_by_name(name):
     return ExerciseSet.query.filter_by(name=name).first()
@@ -31,24 +43,3 @@ def get_all_exerciseSets_json():
     return exerciseSets
 
 
-# def create_exercise(name, description, category):
-#     newExercise = Exercise(name=name, description=description, category=category)
-#     db.session.add(newExercise)
-#     db.session.commit()
-#     return newExercise
-
-# def get_exercise_by_name(name):
-#     return Exercise.query.filter_by(name=name).first()
-
-# def get_exercise_by_id(id):
-#     return Exercise.query.get(id)
-
-# def get_all_exercises():
-#     return Exercise.query.all()
-
-# def get_all_exercises_json():
-#     exercises = Exercise.query.all()
-#     if not exercises:
-#         return[]
-#     exercises = [exercise.get_json() for exercise in exercises]
-#     return exercises

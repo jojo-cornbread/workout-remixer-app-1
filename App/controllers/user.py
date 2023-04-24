@@ -22,7 +22,12 @@ def add_exerciseSet(name, user_id, exercise_id):
         try:
             # print('test1')
             # exerciseSet = create_exerciseSet(name=name, user_id=user_id, exercise_id=exercise_id)
+            # newExerciseSet = ExerciseSet.query.filter_by(name=name).first()
 
+            # if newExerciseSet is not None:
+            #     # add to the set
+            #     test = 1
+            # else:
             newExerciseSet = ExerciseSet(user_id=user_id, exercise_id=exercise_id, name=name)
             db.session.add(newExerciseSet)
             db.session.commit()
@@ -35,38 +40,19 @@ def add_exerciseSet(name, user_id, exercise_id):
             return None
         return None
 
-# def add_exerciseSet(name, user_id, exercise_id):
-#     exercise = Exercise.query.get(exercise_id)
-#     # exercise = get_exercise_by_id(exercise_id)
+def delete_exerciseSet(exerciseSet_id):
 
-#     if exercise:
-#         try:
-#             print('test1')
-#             exerciseSet = create_exerciseSet(name=name, user_id=user_id, exercise_id=exercise_id)
-#             print('test2')
-#             return exerciseSet
-#         except SpecificException as e:
-#             print('Error: {}'.format(e))
-#             db.session.rollback()
-#             return None
-#     else:
-#         print('Exercise not found')
-#         return None
+    exerciseSets = ExerciseSet.query.filter_by(id=exerciseSet_id).all()
 
-
-#  def catch_pokemon(self, pokemon_id, name):
-#     poke = Pokemon.query.get(pokemon_id)
-#     if poke:
-#       try:
-#         pokemon = UserPokemon(self.id, pokemon_id, name)
-#         db.session.add(pokemon)
-#         db.session.commit()
-#         return pokemon
-#       except Exception:
-#         db.session.rollback()
-#         return None
-#     return None
-
+    if exerciseSets is not None:
+        for exerciseSet in exerciseSets:
+            db.session.delete(exerciseSet)
+        
+            db.session.commit()
+        return True
+    return None
+    
+    
 def get_user_by_username(username):
     return User.query.filter_by(username=username).first()
 
