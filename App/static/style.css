@@ -244,7 +244,6 @@ body {
   background-color: #000; 
   color: #fff; 
   border: none; 
-  border-radius: 
   cursor: pointer; 
 }
 
@@ -352,7 +351,6 @@ body.exercise-container {
 }
 
 .exercise-image {
-  width: %;
   max-height: 300px;
   object-fit: cover;
   border-radius: 5px;
