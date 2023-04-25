@@ -4,6 +4,9 @@ from flask_login import current_user, login_required
 
 from.index import index_views
 
+import requests
+import json
+
 from App.controllers import (
     create_user,
     jwt_authenticate, 
@@ -27,14 +30,14 @@ def get_users_action():
 @user_views.route('/api/users', methods=['POST'])
 def create_user_endpoint():
     data = request.json
-    create_user(data['bob'], data['bobpass'])
-    return jsonify({'message': f"user {data['bob']} created"})
+    create_user(data['username'], data['email'], data['password'])
+    return jsonify({'message': f"user {data['username']} created"})
 
 @user_views.route('/users', methods=['POST'])
 def create_user_action():
     data = request.form
-    flash(f"User {data['bob']} created!")
-    create_user(data['bob'], data['bobpass'])
+    flash(f"User {data['username']} created!")
+    create_user(data['username'], data['email'], data['password'])
     return redirect(url_for('user_views.get_user_page'))
 
 @user_views.route('/static/users', methods=['GET'])

@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}SIGNUP{% endblock %}
-{% block page %}SIGNUP{% endblock %}
+{% block page %}EnduranceEmpire{% endblock %}
 
 {{ super() }}
 
@@ -33,7 +33,7 @@
 
       </form>
     </div> -->
-
+ <body  class = "Signup_page">
     <div class="content fill-space">
       <div class="subcontent center-vertical">
         <h4 class="center">Sign Up</h4>
@@ -43,6 +43,13 @@
             <div class="input-field col s12">
               <input placeholder="Username" name="username" type="text" class="validate">
             <label for="username">Username</label>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Email" name="email" type="text" class="validate">
+            <label for="email">Email</label>
             </div>
           </div>
       
@@ -56,22 +63,23 @@
             <div class="col s8 card-action left-align" style="margin-left:0;">
               <a href="/login">&larr; Back to Login</a>
             </div> -->
-            <!-- <div class="col s3 card-action right-align">
+            <div class="col s3 card-action right-align">
               <input type="submit" class="blue text-white btn" value="Sign up">
             </div>
-          </div> -->
-          
+          </div>
+</body>
+<!--           
         <div class="row">
           <div class="input-field col s12">
             <button class="btn waves-effect waves-light right purple" type="submit" name="action">Submit</button>
           </div>
-        </div> 
+        </div>  -->
       
         </form>
       </div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <table>
         <thead>
           <tr>
@@ -87,6 +95,6 @@
           {% endfor %}
         <tbody>
       </table>
-    </div>
+    </div> -->
 
 {% endblock %}
